@@ -14,14 +14,16 @@ class Fighter
     private int $strength;
     private int $dexterity;
     private string $image = 'fighter.svg';
+    private int $x;
+    private int $y;
+    protected float $range = 1;
 
     private int $life = self::MAX_LIFE;
 
-    private ?Weapon $weapon = null;
-    private ?Shield $shield = null;
-
     public function __construct(
         string $name,
+        int $x,
+        int $y,
         int $strength = 10,
         int $dexterity = 5,
         string $image = 'fighter.svg'
@@ -30,62 +32,25 @@ class Fighter
         $this->strength = $strength;
         $this->dexterity = $dexterity;
         $this->image = $image;
+        $this->x = $x;
+        $this->y = $y;
     }
 
     
     public function getDamage(): int
     {
         $damage = $this->getStrength();
-        if($this->getWeapon() !== null) {
-            $damage += $this->getWeapon()->getDamage();
-        }
         return $damage;
     }
 
     public function getDefense(): int
     {
-        $defense = $this->getDexterity();
-        if ($this->getShield() !== null) {
-            $defense += $this->getShield()->getProtection();
-        }    
+        $defense = $this->getDexterity(); 
 
         return $defense;
     }
 
-     /**
-     * Get the value of weapon
-     */ 
-    public function getWeapon(): ?Weapon
-    {
-        return $this->weapon;
-    }
-
-    /**
-     * Set the value of weapon
-     *
-     */ 
-    public function setWeapon(Weapon $weapon): void
-    {
-        $this->weapon = $weapon;
-    }
-
-    /**
-     * Get the value of shield
-     */ 
-    public function getShield(): ?Shield
-    {
-        return $this->shield;
-    }
-
-    /**
-     * Set the value of shield
-     *
-     */ 
-    public function setShield(?Shield $shield): void
-    {
-        $this->shield = $shield;
-    }
-
+    
     /**
      * Get the value of name
      */
@@ -169,5 +134,53 @@ class Fighter
     public function setDexterity($dexterity): void
     {
         $this->dexterity = $dexterity;
+    }
+
+    /**
+     * Get the value of x
+     */ 
+    public function getX(): int
+    {
+        return $this->x;
+    }
+
+    /**
+     * Set the value of x
+     *
+     * @return  self
+     */ 
+    public function setX($x)
+    {
+        $this->x = $x;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of y
+     */ 
+    public function getY(): int
+    {
+        return $this->y;
+    }
+
+    /**
+     * Set the value of y
+     *
+     * @return  self
+     */ 
+    public function setY($y)
+    {
+        $this->y = $y;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of range
+     */ 
+    public function getRange(): float
+    {
+        return $this->range;
     }
 }
